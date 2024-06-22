@@ -28,4 +28,4 @@ jobs:
 
       - name: Test SSH connection
         run: |
-          ssh -T git@github.com
+          git ls-remote git@github.com:username/repository.git
