@@ -28,4 +28,4 @@ jobs:
 
       - name: Test SSH connection
         run: |
-          git ls-remote git@github.com:hdwhdwhdw/repository.git
+          git ls-remote git@github.com:hdwhdwhdw/spring-test-repo.git
