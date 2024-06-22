@@ -45,28 +45,28 @@ jobs:
         name: build-artifacts
         path: build/libs
 
-    # - name: Copy files via SSH
-    #   uses: appleboy/scp-action@v0.1.2
-    #   with:
-    #     host: ${{ secrets.SSH_HOST }}
-    #     username: ${{ secrets.SSH_USERNAME }}
-    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #     port: ${{ secrets.SSH_PORT }}
-    #     source: "build/libs/*.jar"
-    #     target: "/home/heodae/github/spring"
-
-    - name: Setup SSH key
-      uses: webfactory/ssh-agent@v0.5.4
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Add SSH known hosts
-      run: |
-        mkdir -p ~/.ssh
-        ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
     - name: Copy files via SSH
-      run: scp -P ${{ secrets.SSH_PORT }} build/libs/*.jar ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/home/heodae/github/spring
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        source: "build/libs/*.jar"
+        target: "/home/heodae/github/spring"
+
+    # - name: Setup SSH key
+    #   uses: webfactory/ssh-agent@v0.5.4
+    #   with:
+    #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    # - name: Add SSH known hosts
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    # - name: Copy files via SSH
+    #   run: scp -P ${{ secrets.SSH_PORT }} build/libs/*.jar ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/home/heodae/github/spring
 
     - name: Execute remote command over SSH
       uses: appleboy/ssh-action@v0.1.4
