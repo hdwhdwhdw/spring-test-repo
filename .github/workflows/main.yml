@@ -48,20 +48,20 @@ jobs:
     - name: Copy files via SSH
       uses: appleboy/scp-action@v0.1.2
       with:
-        host: ${{ prod.SSH_HOST }}
-        username: ${{ prod.SSH_USERNAME }}
-        key: ${{ prod.SSH_PRIVATE_KEY }}
-        port: ${{ prod.SSH_PORT }}
+        host: ${{ SSH_HOST }}
+        username: ${{ SSH_USERNAME }}
+        key: ${{ SSH_PRIVATE_KEY }}
+        port: ${{ SSH_PORT }}
         source: "build/libs/*.jar"
         target: "/home/heodae/github/spring"
 
     - name: Execute remote command over SSH
       uses: appleboy/ssh-action@v0.1.4
       with:
-        host: ${{ prod.SSH_HOST }}
-        username: ${{ prod.SSH_USERNAME }}
-        key: ${{ prod.SSH_PRIVATE_KEY }}
-        port: ${{ prod.SSH_PORT }}
+        host: ${{ SSH_HOST }}
+        username: ${{ SSH_USERNAME }}
+        key: ${{ SSH_PRIVATE_KEY }}
+        port: ${{ SSH_PORT }}
         script: |
           cd /home/heodae/github/spring
           # 여기에 JAR 파일 실행 명령을 추가하세요
