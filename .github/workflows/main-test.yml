@@ -1,4 +1,4 @@
-name: Test SSH Setup
+name: Test SSH Connection
 
 on:
   push:
@@ -18,10 +18,10 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          
+
       - name: Verify SSH key
         run: |
           ssh-keygen -lf ~/.ssh/id_rsa
